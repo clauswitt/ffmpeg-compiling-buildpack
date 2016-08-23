@@ -9,10 +9,10 @@ echo "-----> Install ffmpeg"
 cd $BUILD_DIR
 
 echo "Installing build dependencies" | indent
-echo deb http://archive.ubuntu.com/ubuntu precise universe multiverse >> /etc/apt/sources.list;
-apt-get update;
-apt-get -y install autoconf automake build-essential git mercurial cmake libass-dev libgpac-dev libtheora-dev libtool libvdpau-dev libvorbis-dev pkg-config texi2html zlib1g-dev libmp3lame-dev wget yasm openssl libssl-dev;
-apt-get clean
+echo sudo deb http://archive.ubuntu.com/ubuntu precise universe multiverse >> /etc/apt/sources.list.d/add-universe;
+sudo apt-get update;
+sudo apt-get -y install autoconf automake build-essential git mercurial cmake libass-dev libgpac-dev libtheora-dev libtool libvdpau-dev libvorbis-dev pkg-config texi2html zlib1g-dev libmp3lame-dev wget yasm openssl libssl-dev;
+sudo apt-get clean
 
 mkdir -p $CACHE_DIR
 cd $CACHE_DIR
@@ -41,21 +41,21 @@ echo "Build L-SMASH" | indent
 cd $CACHE_DIR/l-smash
 ./configure
 make -j $(nproc)
-make install
+sudo make install
 
 echo "Build libx264" | indent
 
 cd $CACHE_DIR/x264
 ./configure --enable-static
 make -j 8
-make install
+sudo make install
 
 echo "Build libx265" | indent
 
 cd $CACHE_DIR/x265/build/linux
 cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ../../source
 make -j 8
-make install
+sudo make install
 
 echo "Build libfdk-aac" | indent
 
@@ -63,14 +63,14 @@ cd $CACHE_DIR/fdk-aac
 autoreconf -fiv
 ./configure --disable-shared
 make -j 8
-make install
+sudo make install
 
 echo "Build libvpx" | indent
 
 cd $CACHE_DIR/libvpx
 ./configure --disable-examples
 make -j 8
-make install
+sudo make install
 
 echo "Build libopus" | indent
 
@@ -78,7 +78,7 @@ cd $CACHE_DIR/opus
 ./autogen.sh
 ./configure --disable-shared
 make -j 8
-make install
+sudo make install
 
 echo "Build ffmpeg." | indent
 
@@ -94,6 +94,6 @@ cd $CACHE_DIR/aacgain/mp4v2
 cd $CACHE_DIR/aacgain/faad2
 ./configure && make -k -j 8 # some commands fail but build succeeds
 cd $CACHE_DIR/aacgain
-./configure && make -j 8 && make install
+./configure && make -j 8 && sudo make install
 
 
