@@ -72,7 +72,7 @@ make install
 echo "Build ffmpeg." | indent
 
 cd $CACHE_DIR/ffmpeg
-./configure --extra-libs="-ldl" --prefix=$BUILD_DIR --enable-gpl --enable-libass  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-nonfree --enable-openssl
+./configure --extra-libs="-ldl" --extra-cflags="-I$BUILD_DIR/include" --extra-ldflags="-L$BUILD_DIR/lib" --prefix=$BUILD_DIR --enable-gpl --enable-libass  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-nonfree --enable-openssl
 make -j 8
 make install
 
