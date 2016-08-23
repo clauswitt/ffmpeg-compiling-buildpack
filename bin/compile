@@ -11,6 +11,9 @@ echo "-----> Install ffmpeg"
 mkdir -p $CACHE_DIR
 cd $CACHE_DIR
 
+mkdir -p $BUILD_DIR/bin
+
+
 echo "Fetching Sources" |indent
 
 echo "Fetching l-smash" | indent
@@ -31,14 +34,14 @@ git clone --depth 1 https://github.com/mulx/aacgain.git
 echo "Build L-SMASH" | indent
 
 cd $CACHE_DIR/l-smash
-./configure
+./configure  --prefix=$BUILD_DIR
 make -j $(nproc)
 make install
 
 echo "Build libx264" | indent
 
 cd $CACHE_DIR/x264
-./configure --enable-static
+./configure --prefix=$BUILD_DIR --enable-static
 make -j 8
 make install
 
@@ -47,14 +50,14 @@ echo "Build libfdk-aac" | indent
 
 cd $CACHE_DIR/fdk-aac
 autoreconf -fiv
-./configure --disable-shared
+./configure --prefix=$BUILD_DIR --disable-shared
 make -j 8
 make install
 
 echo "Build libvpx" | indent
 
 cd $CACHE_DIR/libvpx
-./configure --disable-examples
+./configure --prefix=$BUILD_DIR --disable-examples
 make -j 8
 make install
 
@@ -62,14 +65,14 @@ echo "Build libopus" | indent
 
 cd $CACHE_DIR/opus
 ./autogen.sh
-./configure --disable-shared
+./configure --prefix=$BUILD_DIR --disable-shared
 make -j 8
 make install
 
 echo "Build ffmpeg." | indent
 
 cd $CACHE_DIR/ffmpeg
-./configure --extra-libs="-ldl" --enable-gpl --enable-libass  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-nonfree --enable-openssl
+./configure --extra-libs="-ldl" --prefix=$BUILD_DIR --enable-gpl --enable-libass  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-nonfree --enable-openssl
 make -j 8
 make install
 
