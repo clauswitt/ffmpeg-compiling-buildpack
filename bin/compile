@@ -17,8 +17,6 @@ echo "Fetching l-smash" | indent
 git clone --depth 1 https://github.com/l-smash/l-smash
 echo "Fetching x264" | indent
 git clone --depth 1 git://git.videolan.org/x264.git
-echo "Fetching x265" | indent
-hg clone https://bitbucket.org/multicoreware/x265
 echo "Fetching fdk-aac" | indent
 git clone --depth 1 git://github.com/mstorsjo/fdk-aac.git
 echo "Fetching libvpx" | indent
@@ -44,12 +42,6 @@ cd $CACHE_DIR/x264
 make -j 8
 make install
 
-echo "Build libx265" | indent
-
-cd $CACHE_DIR/x265/build/linux
-cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr ../../source
-make -j 8
-make install
 
 echo "Build libfdk-aac" | indent
 
@@ -77,7 +69,7 @@ make install
 echo "Build ffmpeg." | indent
 
 cd $CACHE_DIR/ffmpeg
-./configure --extra-libs="-ldl" --enable-gpl --enable-libass --enable-libogg --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libx265 --enable-nonfree --enable-openssl
+./configure --extra-libs="-ldl" --enable-gpl --enable-libass --enable-libogg --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-nonfree --enable-openssl
 make -j 8
 make install
 

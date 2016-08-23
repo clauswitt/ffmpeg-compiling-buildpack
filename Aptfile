@@ -2,7 +2,6 @@ autoconf
 automake
 build-essential
 git
-mercurial
 cmake
 libass-dev
 libgpac-dev
