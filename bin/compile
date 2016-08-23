@@ -1,18 +1,12 @@
 #!/bin/sh
+BUILD_DIR=$1
+CACHE_DIR=$2
 
 indent() {
   sed -u 's/^/       /'
 }
 
 echo "-----> Install ffmpeg"
-
-cd $BUILD_DIR
-
-echo "Installing build dependencies" | indent
-echo deb http://archive.ubuntu.com/ubuntu precise universe multiverse >> /etc/apt/sources.list.d/add-universe;
-apt-get update;
-apt-get -y install autoconf automake build-essential git mercurial cmake libass-dev libgpac-dev libtheora-dev libtool libvdpau-dev libvorbis-dev pkg-config texi2html zlib1g-dev libmp3lame-dev wget yasm openssl libssl-dev;
-apt-get clean
 
 mkdir -p $CACHE_DIR
 cd $CACHE_DIR
