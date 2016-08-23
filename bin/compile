@@ -73,13 +73,3 @@ cd $CACHE_DIR/ffmpeg
 make -j 8
 make install
 
-echo "Build aacgain" | indent
-
-cd $CACHE_DIR/aacgain/mp4v2
-./configure && make -k -j 8 # some commands fail but build succeeds
-cd $CACHE_DIR/aacgain/faad2
-./configure && make -k -j 8 # some commands fail but build succeeds
-cd $CACHE_DIR/aacgain
-./configure && make -j 8 && make install
-
-
