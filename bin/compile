@@ -34,14 +34,14 @@ git clone --depth 1 https://github.com/mulx/aacgain.git
 echo "Build L-SMASH" | indent
 
 cd $CACHE_DIR/l-smash
-./configure  --prefix=$BUILD_DIR
+./configure
 make -j $(nproc)
 make install
 
 echo "Build libx264" | indent
 
 cd $CACHE_DIR/x264
-./configure --prefix=$BUILD_DIR --enable-static
+./configure --enable-static
 make -j 8
 make install
 
@@ -50,14 +50,14 @@ echo "Build libfdk-aac" | indent
 
 cd $CACHE_DIR/fdk-aac
 autoreconf -fiv
-./configure --prefix=$BUILD_DIR --disable-shared
+./configure  --disable-shared
 make -j 8
 make install
 
 echo "Build libvpx" | indent
 
 cd $CACHE_DIR/libvpx
-./configure --prefix=$BUILD_DIR --disable-examples
+./configure  --disable-examples
 make -j 8
 make install
 
@@ -65,14 +65,14 @@ echo "Build libopus" | indent
 
 cd $CACHE_DIR/opus
 ./autogen.sh
-./configure --prefix=$BUILD_DIR --disable-shared
+./configure  --disable-shared
 make -j 8
 make install
 
 echo "Build ffmpeg." | indent
 
 cd $CACHE_DIR/ffmpeg
-echo ./configure --extra-libs="-ldl" --extra-cflags="-I$BUILD_DIR/include" --extra-ldflags="-L$BUILD_DIR/lib" --prefix=$BUILD_DIR --enable-gpl --enable-libass  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-nonfree --enable-openssl --enable-static --disable-shared \ --libdir=$BUILD_DIR/lib --extra-version=by_arnsbomedia
+echo ./configure --extra-libs="-ldl"  --enable-gpl --enable-libass  --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-nonfree --enable-openssl --enable-static --disable-shared --extra-version=by_arnsbomedia
 #make -j 8
 #make install
 
